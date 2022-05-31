@@ -247,12 +247,12 @@ It's really amazing, I currently know nothing about this
 `((let () (define loop-name ...) loop-name) args ...)' syntax.
 |#
 
-(define (count-change amount kinds-of-coins)
+(define (count-change amount)
   (define (cc amount kinds-of-coins)
 ;    (dbg amount)
 ;;    (let ((asdf 9))
 ;;      (dbg6 amount kinds-of-coins asdf asdf))
-    (dbg7 amount kinds-of-coins)
+;;;    (dbg7 amount kinds-of-coins)
 
 ;    (display "amount: ")
 ;    (display amount)
@@ -272,13 +272,13 @@ It's really amazing, I currently know nothing about this
           ((= kinds-of-coins 3) 10)
           ((= kinds-of-coins 4) 25)
           ((= kinds-of-coins 5) 50)))
-  (cc amount kinds-of-coins))
+  (cc amount 5))
 
 #|
 The above function definition shows that when defining a procedure,
 its parameters are shadowing variables outside.
 
-(count-change 100 5)
+(count-change 100)
 =>
  amount: 100,	 kinds-of-coins: 5,	
  amount: 50,	 kinds-of-coins: 5,	
@@ -312,19 +312,19 @@ has bug or not, how can you prove the correctness the the program?
 Maybe i can start with some small number to calculate by hand, then
 compare the results between them.
 
-(count-change 10 5)
+(count-change 10)
 by hand => 10 -> 5 + 5                                             -+
               -> 5 + 1 + 1 + 1 + 1 + 1                              |==> 4 ways
               -> 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1              |
               -> 10                                                -+
 
-(count-change 12 5)
+(count-change 12)
 by hand => 10 -> 5 + 5 + 1 + 1                                     -+
               -> 5 + 1 + 1 + 1 + 1 + 1 + 1 + 1                      |==> 4 ways
               -> 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1      |
               -> 10 + 1 + 1                                        -+
 
-(count-change 10 5)
+(count-change 10)
 =>
  amount: 10,	 kinds-of-coins: 5,	
  amount: -40,	 kinds-of-coins: 5,	
@@ -345,7 +345,7 @@ by hand => 10 -> 5 + 5 + 1 + 1                                     -+
  amount: 10,	 kinds-of-coins: 1,	
 ;Value: 4
 
-(count-change 12 5)
+(count-change 12)
 =>
  amount: 12,	 kinds-of-coins: 5,	
  amount: -38,	 kinds-of-coins: 5,	
@@ -366,7 +366,7 @@ by hand => 10 -> 5 + 5 + 1 + 1                                     -+
  amount: 12,	 kinds-of-coins: 1,	
 ;Value: 4
 
-(count-change 300 5)
+(count-change 300)
 => ;Value: 9590
 
 |#

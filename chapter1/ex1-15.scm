@@ -39,7 +39,8 @@
 2) Time: Theta(n) = log_3(n))
    Space: Theta(n) = log_3(n))
 
-1) 5 times. Because the 4th call still called `in:sine' and the `angle'.
+1) 5 times. Because the 4th call still called `in:sine' and then
+   return the `angle'.
 2) let n be the size of the problem (which is the `angle'), and x be
    the times we apply `p', hence
    n * (1/3)^x < 0.001

@@ -129,7 +129,7 @@
 
 Comparing this to my solution, obviously my solution is superior than
 this, because my solution takes fewer iteractions and it's more
-straightforward and understandable.
+straightforward and comprehensible.
 |#
 
 

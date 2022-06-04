@@ -1,4 +1,7 @@
 ;; This is very inefficient
+;; `*' Time: O(n) Space: O(n)
+;; `square' Time: O(n) Space: O(1)
+;; `in:fast-expt' Time: O(log n) Space: O(log n)
 (define (fast-expt a n)
   (define (* a b)
     (if (= b 0)
@@ -77,6 +80,9 @@
 ;Value: 1024
 |#
 
+;; `*' Time: O(n) Space: O(n)
+;; `square' Time: O(log n) Space: O(1)
+;; `in:fast-expt' Time: O(log n) Space: O(log n)
 (define (fast-expt a n)
   (define (* a b)
     (if (= b 0)
@@ -101,6 +107,28 @@
           (else (* a (in:fast-expt a (-1+ n))))))
   (in:fast-expt a n))
 
+#|
+(fast-expt 435 345)
+=>
+ a: 435,	 n: 345,	
+ a: 435,	 n: 344,	
+ a: 435,	 n: 172,	
+ a: 435,	 n: 86,	
+ a: 435,	 n: 43,	
+ a: 435,	 n: 42,	
+ a: 435,	 n: 21,	
+ a: 435,	 n: 20,	
+ a: 435,	 n: 10,	
+ a: 435,	 n: 5,	
+ a: 435,	 n: 4,	
+ a: 435,	 n: 2,	
+ a: 435,	 n: 1,	
+ a: 435,	 n: 0,	
+;Aborting!: maximum recursion depth exceeded
+
+Why? This is just because of the procedure `*' which is linear
+recursive, its space complexity is O(n).
+|#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                             Testing                              ;;
@@ -165,7 +193,9 @@
         (else (* a (in:fast-expt a (-1+ n))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
+;; `*' Time: O(n) Space: O(n)
+;; `square' Time: O(log n) Space: O(1)
+;; `in:fast-expt' Time: O(log n) Space: O(log n)
 (define (fast-expt a n)
   (define (* a b)
     (if (= b 0)
@@ -206,9 +236,14 @@ But (fast-expt 324 25) will produce the following error
  p: 848222314095702595619266316238009495709050130498878059839488,	 nn: 2,	 slot: 94492108169564181706457442767912539367486418978044746137600,	
  p: 1696444628191405191238532632476018991418100260997756119678976,	 nn: 1,	 slot: 94492108169564181706457442767912539367486418978044746137600,	
 ;Aborting!: maximum recursion depth exceeded
+
+This is still because of the procedure `*' is linear recursive.
 |#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; `*' Time: O(n) Space: O(n)
+;; `square' Time: O(log n) Space: O(1)
+;; `in:fast-expt' Time: O(log n) Space: O(1)
 (define (fast-expt a n)
   (define (* a b)
     (if (= b 0)
@@ -242,6 +277,9 @@ But (fast-expt 324 25) will produce the following error
  p: 8960655802280667279882673708367886680064,	 nn: 1,	 slot: 5786903910680014995394489879797392474112,	
  a: 14747559712960682275277163588165279154176,	 n: 1,	 slot: 121439531096594251776,	
 ;Aborting!: maximum recursion depth exceeded
+
+I still didn't realized that I can optimize `*' to O(n) time
+complexity and O(1) space complexity.
 |#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -275,7 +313,7 @@ But (fast-expt 324 25) will produce the following error
 ;Value: 1497
 |#
 
-;; i can optimize `fast-*' a lot bit
+;; i can optimize `fast-*' a little bit
 (define (fast-* a b)
   (define (in:* a n slot)
     (dbg a n slot)
@@ -297,6 +335,9 @@ But (fast-expt 324 25) will produce the following error
 |#
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; `*' Time: O(log n) Space: O(1)
+;; `square' Time: O(log n) Space: O(1)
+;; `in:fast-expt' Time: O(log n) Space: O(1)
 (define (fast-expt a n)
   (define (fast-* a b)
     (define (in:* a n slot)

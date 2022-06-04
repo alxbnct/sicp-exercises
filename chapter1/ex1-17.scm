@@ -11,7 +11,7 @@
     (+ n n))
 
   ;; This procedure is not working when `n' is very large, it will
-  ;; produce the following error
+  ;; produces the following error
   ;; ;Aborting!: maximum recursion depth exceeded
   (define (square n)
     (define (in:square prod iter)
